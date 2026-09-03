@@ -1,14 +1,16 @@
-def fibonacci_iterative(n):
-    sequence = []
-    a, b = 0, 1
+def fibonacci_recursive(n):
+    if n <= 0:
+        return []
+    if n == 1:
+        return [0]
 
-    for _ in range(n):
-        sequence.append(a)
-        a, b = b, a + b
+    sequence = fibonacci_recursive(n - 1)
+    sequence.append(sequence[-1] + sequence[-2] if len(sequence) > 1 else 1)
 
     return sequence
 
 
 with open("output/fibonacci.txt", "w") as file:
-    for number in fibonacci_iterative(25):
+    for number in fibonacci_recursive(25):
         file.write(str(number) + "\n")
+
