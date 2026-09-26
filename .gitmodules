@@ -1,0 +1,9 @@
+[submodule "Lab3/pychess"]
+	path = Lab3/pychess
+	url = https://github.com/pychess/pychess
+[submodule "Lab3/cloudcmd"]
+	path = Lab3/cloudcmd
+	url = https://github.com/coderaiser/cloudcmd
+[submodule "Lab3/590MakefileLab"]
+	path = Lab3/590MakefileLab
+	url = https://github.com/rz447csuci/590MakefileLab
