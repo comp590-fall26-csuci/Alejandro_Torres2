@@ -1,0 +1,37 @@
+name: AFL++ Fuzzing
+
+on:
+  pull_request:
+
+jobs:
+  afl-fuzz:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install AFL++
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y afl++
+
+      - name: Compile dvcp
+        run: |
+          afl-cc dvcp.c -o dvcp
+
+      - name: Prepare AFL++ input
+        run: |
+          mkdir -p input
+          echo "test" > input/test.txt
+
+      - name: Configure system for AFL++
+        run: |
+          sudo bash -c 'echo core > /proc/sys/kernel/core_pattern'
+          echo "Kernel.core_pattern configured"
+
+
+      - name: Run AFL++ for 3 minutes
+        run: |
+          timeout 180 afl-fuzz -i input -o output -- ./dvcp @@

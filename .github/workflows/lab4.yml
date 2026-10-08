@@ -1,0 +1,24 @@
+name: Lab4 C Build and Test
+
+on:
+  push:
+    branches:
+      - Lab4
+      - Lab4Task4
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build C program
+        run: make -C L4/590MakefileLab
+
+      - name: Run unit tests
+        run: make -C L4/590MakefileLab run
