@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - Lab3
+      - Lab5
       - main
   pull_request:
 
@@ -39,4 +40,15 @@ jobs:
           fi
 
           echo "Output is correct!"
-```
+
+  semgrep:
+    name: Semgrep Community Edition Scan
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep security scan
+        run: semgrep scan --config auto
