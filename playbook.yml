@@ -12,3 +12,11 @@
       ansible.builtin.apt:
        name: apache2
        state: present
+    - name: Enable apache2 service
+      ansible.builtin.service:
+       name: apache2
+       enabled: true
+       state: started
+    - name: Show debug message
+      ansible.builtin.debug:
+       msg: "Configuration debug complete."
