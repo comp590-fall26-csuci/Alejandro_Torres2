@@ -1,0 +1,42 @@
+name: Lab4 C Program
+
+on:
+  push:
+    branches:
+      - Lab3
+      - main
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build C code with Makefile
+        run: make
+
+      - name: Run C program
+        run: |
+          ./lab3 > output.txt
+          cat output.txt
+
+      - name: Verify output
+        run: |
+          expected="55
+1.618034"
+          actual=$(cat output.txt)
+
+          if [ "$actual" != "$expected" ]; then
+            echo "Output is incorrect."
+            echo "Expected:"
+            echo "$expected"
+            echo "Got:"
+            echo "$actual"
+            exit 1
+          fi
+
+          echo "Output is correct!"
+```
