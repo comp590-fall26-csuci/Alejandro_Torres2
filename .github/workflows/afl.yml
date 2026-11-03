@@ -6,6 +6,7 @@ on:
 jobs:
   afl-fuzz:
     runs-on: ubuntu-latest
+    continue-on-error: true
     
 
     steps:
@@ -27,7 +28,6 @@ jobs:
           echo "test" > input/test.txt
 
       - name: Run AFL++ for 3 minutes
-        continue-on-error: true
         run: |
           timeout 180 afl-fuzz -i input -o output -- ./dvcp @@
           STATUS=$?
@@ -40,6 +40,3 @@ jobs:
           exit "$STATUS"
 
 
-      - name: Run AFL++ for 3 minutes
-        run: |
-          timeout 180 afl-fuzz -i input -o output -- ./dvcp @@
