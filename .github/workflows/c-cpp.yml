@@ -14,7 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: configure
-      run: gcc -o main -Iheaders -lm main.c fibonacci.c
+      run: |
+        cd L4/590MakefileLab
+        gcc -o main -Iheaders -lm main.c fibonacci.c -lm
     - name: make
-      run: ./main
+      run: |
+        cd L4/590MakefileLab
+        ./main
 
