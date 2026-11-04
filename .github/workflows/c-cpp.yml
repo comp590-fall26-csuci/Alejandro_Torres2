@@ -1,0 +1,24 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: configure
+      run: |
+        cd L4/590MakefileLab
+        gcc -o main -Iheaders -lm main.c fibonacci.c -lm
+    - name: make
+      run: |
+        cd L4/590MakefileLab
+        ./main
+
